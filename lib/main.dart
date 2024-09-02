@@ -63,15 +63,17 @@ class _MyAppState extends State<MyApp> {
 
   String? _extractUrl(String? text) {
     if (text != null && text.isNotEmpty) {
+      print(text);
       // Regular expression to match Medium URLs
       final urlRegExp = RegExp(
-        r'(https?:\/\/medium\.com\/[^\s,}]+)', // Match only Medium URLs
+        r'(https?:\/\/[^\s,}]+)', // Match any URL pattern
         caseSensitive: false,
         multiLine: false,
       );
       final match = urlRegExp.firstMatch(text);
-      print(match?.group(0));
-      return match?.group(0);
+      final url = match?.group(0);
+      print("Extracted URL: $url");
+      return url;
     }
     return null;
   }
@@ -80,6 +82,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     const textStyleBold = TextStyle(fontWeight: FontWeight.bold);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text('Share2Read'),
